@@ -30,7 +30,7 @@ public class Ball : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Destroy(GameObject.Find("Instruction Text"));
-            ballBody.AddForce(new Vector2(0.5f, 9), ForceMode2D.Impulse);
+            ballBody.AddForce(new Vector2(0.3f, 8), ForceMode2D.Impulse);
             gameStarted = true;
         }
     }
