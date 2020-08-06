@@ -8,7 +8,7 @@ public class BricksManager : MonoBehaviour
     [SerializeField]
     private int numOfBrickableBricks;
 
-    private LevelManager LevelManager;
+    private GameManager gameManager;
     private AudioManager audioManager;
     private bool soundNotPlayed;
     public void DestroyBrick()
@@ -21,10 +21,10 @@ public class BricksManager : MonoBehaviour
     }
     void Start()
     {
-        LevelManager = GameObject.FindObjectOfType<LevelManager>();
+        gameManager = GameObject.FindObjectOfType<GameManager>();
         audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
         soundNotPlayed = true;
-        Cursor.visible = false;
+       
     }
     
     // Update is called once per frame
@@ -38,8 +38,8 @@ public class BricksManager : MonoBehaviour
                 audioManager.PlayClearingLevelAudio();
                 
             }
-            LevelManager.LoadNextLevel();
-            Cursor.visible = true;
+            gameManager.OnWinning();
+            
         }
     }
     //void CreateNewBrick()

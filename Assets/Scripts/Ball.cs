@@ -9,48 +9,37 @@ public class Ball : MonoBehaviour
     private Paddle paddle;
     private Vector3 ballToPaddle;
     private bool gameStarted;
+
+    public Vector3 Position
+    {
+        get
+        {
+            return transform.position;
+        }
+    }
+   
     void Start()
     {
         paddle = GameObject.FindObjectOfType<Paddle>();
         ballBody = GetComponent<Rigidbody2D>();
         gameStarted = false;
+        
     }
-    public bool IsServed()
+    public void AddForce(Vector2 force)
     {
-        return gameStarted;
+        ballBody.AddForce(force, ForceMode2D.Impulse);
     }
     // Update is called once per frame
-    void ServeBall()
-    {
-        // Move ball with paddle when ball's not been served yet
-        ballToPaddle = gameObject.transform.position;
-        ballToPaddle.x += paddle.transform.position.x - gameObject.transform.position.x;
-        gameObject.transform.position = ballToPaddle;
-        // Serve ball on left mouse clicked
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+    
+    public void CheckVelocity() { 
+        // Prevent ball from rolling in the same directon forever
+        if (ballBody.velocity.x == 0)
         {
-            Destroy(GameObject.Find("Instruction Text"));
-            ballBody.AddForce(new Vector2(0.3f, 8), ForceMode2D.Impulse);
-            gameStarted = true;
+            ballBody.velocity = new Vector2(Random.Range(1, 3), ballBody.velocity.y);
         }
-    }
-    void Update()
-    {
-        if (!gameStarted)
+        else if (ballBody.velocity.y == 0)
         {
-            ServeBall();
-        }
-        else
-        {
-            // Prevent ball from rolling in the same directon forever
-            if (ballBody.velocity.x == 0)
-            {
-                ballBody.velocity = new Vector2(Random.Range(1, 3), ballBody.velocity.y);
-            }
-            else if (ballBody.velocity.y == 0)
-            {
-                ballBody.velocity = new Vector2(ballBody.velocity.x, Random.Range(1, 3));
-            }
+            ballBody.velocity = new Vector2(ballBody.velocity.x, Random.Range(1, 3));
         }
     }
 }

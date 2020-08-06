@@ -8,14 +8,7 @@ public class LevelManager : MonoBehaviour
     public void Awake()
     {
         // Show mouse cursor on UI screen and hide it on game screen
-        if (this.tag == "UIScreen")
-        {
-            Cursor.visible = true;
-        }
-        else
-        {
-            Cursor.visible = false;
-        }
+        Cursor.visible = true;
     }
     public void Start()
     {
