@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class LoseCondition : MonoBehaviour
 {
-    private LevelManager LevelManager;
+    private GameManager gameManager;
     private BricksManager BricksManager;
     private AudioManager audioManager;
     private void Start()
     {
-        LevelManager = GameObject.FindObjectOfType<LevelManager>();
+        gameManager = GameObject.FindObjectOfType<GameManager>();
         BricksManager = GameObject.FindObjectOfType<BricksManager>();
         audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
     }
@@ -19,7 +19,7 @@ public class LoseCondition : MonoBehaviour
         if (BricksManager.RemainBricks() > 0)
         {
             audioManager.PlayFailingAudio();
-            LevelManager.LoadLevel("Lose");
+            gameManager.OnLosing();
         }
     }
 }

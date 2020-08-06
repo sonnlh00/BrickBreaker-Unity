@@ -410,7 +410,7 @@ namespace UnityEditor.SettingsManagement
 
 #if UNITY_2019_1_OR_NEWER
                 menu.AddSeparator("Developer/");
-                menu.AddItem(new GUIContent("Developer/Recompile Scripts"), false, UnityEditorInternal.InternalEditorUtility.RequestScriptReload);
+                menu.AddItem(new GUIContent("Developer/Recompile Scripts"), false, UnityEditor.EditorUtility.RequestScriptReload);
 #endif
             }
 
